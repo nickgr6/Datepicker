@@ -87,19 +87,26 @@ class EventController extends Controller
 	{
 		$model=$this->loadModel($id);
 		
-		$recipients = Event::model()->with("user")->findAll();
-		
-		var_dump($recipients[0]->user);
-		//var_dump($model);
-		
 		// Uncomment the following line if AJAX validation is needed
 		$this->performAjaxValidation($model);
-
+		
+		//var_dump($model->recipients);
+		
 		if(isset($_POST['Event']))
 		{
 			$model->attributes=$_POST['Event'];
-			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+			
+			if($model->save()) {
+				$recipient = new Recipient();
+				$recipient->email = "emailaddress1";
+				$recipient->event_id = $model->id;
+				
+				if(!$recipient->save()) {
+					var_dump($recipient->getErrors()); die();
+				}
+				
+				$this->redirect(array('update','id'=>$model->id));
+			}
 		}
 
 		$this->render('update',array(
