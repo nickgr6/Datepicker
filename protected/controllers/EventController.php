@@ -70,7 +70,18 @@ class EventController extends Controller
 		{
 			$model->attributes=$_POST['Event'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+				
+				$recipient = new Recipient();
+				$recipient->email = "emailaddress1";
+				$recipient->event_id = $model->id;
+				
+				if(!$recipient->save()) {
+					var_dump($recipient->getErrors()); die();
+				}
+				
+				$this->redirect(array('update','id'=>$model->id));
+				
+				//$this->redirect(array('view','id'=>$model->id));
 		}
 
 		$this->render('create',array(
