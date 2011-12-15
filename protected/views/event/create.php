@@ -10,6 +10,10 @@ $this->menu=array(
 );
 ?>
 
-<h1>Create Event</h1>
+<h1>Maak afspraak</h1>
+<p class="note">Fields with <span class="required">*</span> are required.</p>
 
-<?php echo $this->renderPartial('_form', array('model'=>$model)); ?>
+<div id="event_details">
+	<h2>Afspraakgegevens</h2>
+	<?php echo $this->renderPartial('edit/event', array('model'=>$model)); ?>
+</div>
