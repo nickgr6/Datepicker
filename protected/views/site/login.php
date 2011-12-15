@@ -16,6 +16,9 @@ $this->breadcrumbs=array(
 	'clientOptions'=>array(
 		'validateOnSubmit'=>true,
 	),
+	'htmlOptions'=>array(
+		'class'=>'form-alt',
+	),
 )); ?>
 
 	<p class="note">Fields with <span class="required">*</span> are required.</p>
@@ -42,7 +45,11 @@ $this->breadcrumbs=array(
 	</div>
 
 	<div class="row buttons">
-		<?php echo CHtml::submitButton('Login'); ?>
+		<p class="button button-arrow">
+			<?php echo CHtml::submitButton('Login'); ?>
+			<span class="icon"></span>
+		</p>
+		
 	</div>
 
 <?php $this->endWidget(); ?>
